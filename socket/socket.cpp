@@ -21,6 +21,13 @@ Socket::Socket(int port) : port(port)
     serverAddress.sin_port = htons(this->port);
 }
 
+// ---------------------------------- Getter ----------------------------------->
+
+int Socket::getServerSocket()
+{
+    return this->serverSocket;
+}
+
 // ---------------------------------- Start listening ----------------------------------->
 
 void Socket::listenSocket()
