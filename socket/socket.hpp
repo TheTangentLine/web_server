@@ -10,6 +10,8 @@ public:
     void listenSocket();
     void closeSocket();
 
+    int getServerSocket();
+
     ~Socket();
 
 private:
