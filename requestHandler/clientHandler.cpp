@@ -5,26 +5,24 @@
 #include <sys/socket.h>
 #include <unistd.h>
 
+// ----------------------------- Constructor --------------------------------->
+
 ClientHandler::ClientHandler(int clientSocket) : clientSocket(clientSocket) {}
 
-ClientHandler::~ClientHandler()
-{
-    close(clientSocket); // Close the client socket when done
-}
+// ----------------------------- Handle request ------------------------------->
 
 void ClientHandler::handleRequest()
 {
-    std::string request = parseRequest(); // Read and parse the HTTP request
+    std::string request = parseRequest();
     std::cout << "Request received:\n"
               << request << std::endl;
 
-    // Simple HTTP response
     std::string response = "HTTP/1.1 200 OK\r\n";
     response += "Content-Type: text/html\r\n";
     response += "Connection: close\r\n\r\n";
     response += "<html><body><h1>Hello from C++ Web Server!</h1></body></html>";
 
-    sendResponse(response); // Send the response back to the client
+    sendResponse(response);
 }
 
 std::string ClientHandler::parseRequest()
@@ -42,7 +40,16 @@ std::string ClientHandler::parseRequest()
     return std::string(buffer);
 }
 
+// ---------------------------- Handle response ------------------------------>
+
 void ClientHandler::sendResponse(const std::string &response)
 {
     send(clientSocket, response.c_str(), response.length(), 0);
+}
+
+// ---------------------------- Stop listening ------------------------------>
+
+ClientHandler::~ClientHandler()
+{
+    close(clientSocket);
 }
