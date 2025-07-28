@@ -7,16 +7,16 @@ class Socket
 {
 public:
     Socket(int port = 8080);
-    void listenSocket();
-    void closeSocket();
+    ~Socket();
 
     int getServerSocket();
 
-    ~Socket();
+    void listenSocket();
+    void closeSocket();
 
 private:
     int serverSocket;
-    struct sockaddr_in serverAddress;
+    sockaddr_in serverAddress;
     int port;
 };
 

@@ -9,6 +9,7 @@
 
 Socket::Socket(int port) : port(port)
 {
+    // Creating a socket
     serverSocket = socket(AF_INET, SOCK_STREAM, 0);
     if (serverSocket == -1)
     {
@@ -16,6 +17,7 @@ Socket::Socket(int port) : port(port)
         exit(1);
     }
 
+    // Setup server address information
     serverAddress.sin_family = AF_INET;
     serverAddress.sin_addr.s_addr = INADDR_ANY;
     serverAddress.sin_port = htons(this->port);
@@ -32,7 +34,7 @@ int Socket::getServerSocket()
 
 void Socket::listenSocket()
 {
-    if (bind(serverSocket, (struct sockaddr *)&serverAddress, sizeof(serverAddress)) == -1)
+    if (bind(serverSocket, (sockaddr *)&serverAddress, sizeof(serverAddress)) == -1)
     {
         std::cerr << "Bind failed!" << std::endl;
         closeSocket();
