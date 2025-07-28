@@ -7,9 +7,9 @@ class ClientHandler
 {
 public:
     ClientHandler(int clientSocket);
-    void handleRequest();
-
     ~ClientHandler();
+
+    void handleRequest();
 
 private:
     int clientSocket;
